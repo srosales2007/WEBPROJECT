@@ -1,87 +1,758 @@
 <!DOCTYPE html>
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">Built for your next big idea</div>
-        <h1>A clean startup website you can launch fast.</h1>
-        <p>
-          This is a simple landing page template for a startup, SaaS, agency, or personal product.
-          Replace the text, add your branding, and publish it on GitHub in minutes.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#contact">Start Building</a>
-          <a class="btn btn-secondary" href="#features">See Features</a>
-        </div>
-        <div class="hero-note">No frameworks. No setup headaches. Just one file to start.</div>
-      </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Northstar | Startup Landing Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0f1d33;
+      --surface: rgba(14, 25, 46, 0.78);
+      --surface-strong: #132440;
+      --line: rgba(255, 255, 255, 0.1);
+      --text: #f3f7ff;
+      --muted: #a7b5cb;
+      --accent: #6ef2c7;
+      --accent-strong: #21c997;
+      --accent-warm: #ffd166;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+    }
 
-      <div class="hero-card">
-        <div class="mini-stat">
-          <strong>01</strong>
-          <span>Replace the startup name, headline, and CTA.</span>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Instrument Sans", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(110, 242, 199, 0.16), transparent 32%),
+        radial-gradient(circle at top right, rgba(255, 209, 102, 0.14), transparent 28%),
+        linear-gradient(180deg, #07111f 0%, #091423 48%, #0b1730 100%);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      padding: 24px 0 40px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #89a6ff);
+      color: #08111f;
+      box-shadow: 0 12px 24px rgba(110, 242, 199, 0.25);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .nav-links a:hover,
+    .nav-cta:hover,
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .nav-cta,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: transform 180ms ease, opacity 180ms ease, background 180ms ease;
+    }
+
+    .nav-cta {
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-cta:hover,
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(110, 242, 199, 0.22);
+      background: rgba(110, 242, 199, 0.08);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h1 {
+      margin: 20px 0 18px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5.25rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      max-width: 10ch;
+    }
+
+    .hero-copy {
+      max-width: 590px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions,
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 22px;
+      font-size: 0.98rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #8bdcff);
+      color: #07111f;
+      box-shadow: 0 16px 30px rgba(110, 242, 199, 0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text);
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 28px;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(19, 36, 64, 0.96), rgba(11, 21, 40, 0.98));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% 70% auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(110, 242, 199, 0.28), transparent 68%);
+      pointer-events: none;
+    }
+
+    .panel-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 26px;
+    }
+
+    .panel-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(110, 242, 199, 0.16);
+    }
+
+    .metric {
+      margin-bottom: 10px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(3rem, 8vw, 4.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+    }
+
+    .panel-copy {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 0 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 12px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #dce6f7;
+      font-size: 0.95rem;
+    }
+
+    .checklist-item::before {
+      content: "";
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: var(--accent-warm);
+      box-shadow: 0 0 0 6px rgba(255, 209, 102, 0.14);
+      flex: 0 0 auto;
+    }
+
+    .section {
+      padding: 42px 0 88px;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2,
+    .split-copy h2,
+    .cta-banner h2 {
+      margin: 16px 0 14px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p,
+    .split-copy p,
+    .cta-banner p {
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .logo-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 26px;
+    }
+
+    .logo-pill {
+      padding: 18px 20px;
+      border-radius: 18px;
+      text-align: center;
+      color: #ced8eb;
+      font-family: "Space Grotesk", sans-serif;
+      letter-spacing: 0.08em;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card,
+    .testimonial,
+    .cta-banner {
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .feature-card {
+      padding: 24px;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(110, 242, 199, 0.2), rgba(139, 166, 255, 0.18));
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 0.92fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .split-copy {
+      padding-right: 10px;
+    }
+
+    .benefit-list {
+      list-style: none;
+      padding: 0;
+      margin: 26px 0 0;
+      display: grid;
+      gap: 16px;
+    }
+
+    .benefit-list li {
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #dbe6f8;
+      line-height: 1.6;
+    }
+
+    .testimonial {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+    }
+
+    .quote {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+      margin: 0 0 24px;
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255, 209, 102, 0.3), rgba(110, 242, 199, 0.22));
+      color: #08111f;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+    }
+
+    .person strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .person span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .cta-banner {
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 209, 102, 0.14), transparent 28%),
+        linear-gradient(180deg, rgba(19, 36, 64, 0.96), rgba(11, 21, 40, 0.98));
+    }
+
+    .footer {
+      padding: 0 0 36px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 960px) {
+      .hero,
+      .split,
+      .feature-grid,
+      .logo-row,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        max-width: 11ch;
+      }
+
+      .cta-banner,
+      .footer-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 32px, 1120px);
+      }
+
+      .site-header {
+        padding-top: 18px;
+      }
+
+      .hero-panel,
+      .feature-card,
+      .testimonial,
+      .cta-banner {
+        padding: 22px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.4rem, 12vw, 3.8rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav">
+        <a class="logo" href="#top">
+          <span class="logo-mark">N</span>
+          <span>Northstar</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#product">Product</a>
+          <a href="#results">Results</a>
+          <a href="#demo">Demo</a>
         </div>
-        <div class="mini-stat">
-          <strong>02</strong>
-          <span>Add your product screenshots, logo, or waitlist form.</span>
+
+        <a class="nav-cta" href="#demo">Book a Demo</a>
+      </nav>
+
+      <div class="hero" id="top">
+        <div>
+          <div class="eyebrow">Built for early teams that need focus</div>
+          <h1>Run your startup with less chaos.</h1>
+          <p class="hero-copy">
+            Northstar gives founders one place to manage leads, track weekly goals, and keep the team moving.
+            It is a simple operating layer for startups that have outgrown spreadsheets but do not want enterprise bloat.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#demo">Start Free</a>
+            <a class="btn btn-secondary" href="#product">See Features</a>
+          </div>
+
+          <div class="hero-meta">
+            <span>14-day free trial</span>
+            <span>No credit card required</span>
+            <span>Setup in under 10 minutes</span>
+          </div>
         </div>
-        <div class="mini-stat">
-          <strong>03</strong>
-          <span>Push to GitHub and publish with GitHub Pages.</span>
-        </div>
+
+        <aside class="hero-panel" aria-label="Growth dashboard preview">
+          <div class="panel-top">
+            <span class="panel-chip"><span class="dot"></span> Weekly growth snapshot</span>
+            <span>Updated live</span>
+          </div>
+
+          <div class="metric">+38%</div>
+          <p class="panel-copy">
+            Teams using Northstar reduce manual follow-up work and get a clearer view of what is driving growth each week.
+          </p>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <strong>142</strong>
+              <span>qualified leads this month</span>
+            </div>
+            <div class="stat-card">
+              <strong>9.4h</strong>
+              <span>saved every week on ops work</span>
+            </div>
+            <div class="stat-card">
+              <strong>91%</strong>
+              <span>team visibility across priorities</span>
+            </div>
+          </div>
+
+          <div class="checklist">
+            <div class="checklist-item">Track pipeline, tasks, and goals in one place</div>
+            <div class="checklist-item">Automate handoffs without hiring ops too early</div>
+            <div class="checklist-item">Keep founders, sales, and product aligned</div>
+          </div>
+        </aside>
       </div>
     </div>
   </header>
 
-  <section id="features">
-    <div class="container">
-      <h2 class="section-title">Core sections already included</h2>
-      <p class="section-copy">
-        This starter keeps things minimal while still giving you enough structure to turn it into a real brand site.
-      </p>
-
-      <div class="grid-3">
-        <div class="card">
-          <h3>Hero Section</h3>
-          <p>A headline, short pitch, call-to-action buttons, and a side panel for key points or metrics.</p>
-        </div>
-        <div class="card">
-          <h3>Feature Blocks</h3>
-          <p>Three clean cards you can use for benefits, product features, service pillars, or startup differentiators.</p>
-        </div>
-        <div class="card">
-          <h3>Contact CTA</h3>
-          <p>A simple final call-to-action section to guide people toward your email, form, demo, or waitlist.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="container">
-      <h2 class="section-title">About your startup</h2>
-      <p class="section-copy">
-        Write a short explanation of what your startup does, who it helps, and why it matters.
-        Keep it direct, outcome-focused, and easy to scan.
-      </p>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container">
-      <div class="cta">
-        <div>
-          <h2 class="section-title" style="margin-bottom: 8px;">Ready to turn this into your real site?</h2>
-          <p class="section-copy" style="margin-bottom: 0; max-width: 560px;">
-            Replace this block with your email, Calendly, waitlist, contact form, or product launch link.
+  <main>
+    <section class="section" aria-labelledby="trusted-heading">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker" id="trusted-heading">Trusted by fast-moving teams</div>
+          <h2>A basic landing page with a startup feel, ready to customize.</h2>
+          <p>
+            This template gives you a clean first version of your homepage with strong hierarchy, simple calls to action,
+            and enough structure to swap in your own brand, product copy, and links.
           </p>
         </div>
-        <a class="btn btn-primary" href="mailto:hello@startup.com">Contact Us</a>
+
+        <div class="logo-row">
+          <div class="logo-pill">PILOTLAB</div>
+          <div class="logo-pill">VECTRA</div>
+          <div class="logo-pill">BRIGHTOS</div>
+          <div class="logo-pill">LUMA AI</div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="section" id="product">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">Why it works</div>
+          <h2>Simple sections that explain the product fast.</h2>
+          <p>
+            The layout is built around the basics most startup sites need: a strong headline, quick proof points,
+            feature cards, and a closing section that pushes visitors toward a demo or signup.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">01</div>
+            <h3>Clear positioning</h3>
+            <p>
+              Lead with one sentence that explains what your product does, who it helps, and why it matters.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">02</div>
+            <h3>Easy proof points</h3>
+            <p>
+              Use the stats panel to highlight traction, customer wins, or other numbers that build trust quickly.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">03</div>
+            <h3>Strong closing CTA</h3>
+            <p>
+              End with one clear action so visitors know whether to book a demo, join a waitlist, or contact the team.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="container split">
+        <div class="split-copy">
+          <div class="section-kicker">Built for momentum</div>
+          <h2>Use this page as your launch-ready homepage, then grow it with your brand.</h2>
+          <p>
+            You can keep this version lightweight or expand it with testimonials, pricing, screenshots, and a form.
+            The structure is intentionally basic so it is easy to edit without touching a framework or build system.
+          </p>
+
+          <ul class="benefit-list">
+            <li>Swap in your startup name, headline, and buttons in a few minutes.</li>
+            <li>Add screenshots or product mockups inside the right-hand hero panel.</li>
+            <li>Replace the sample logos and metrics with real customer proof when you have it.</li>
+          </ul>
+        </div>
+
+        <aside class="testimonial" aria-label="Customer testimonial">
+          <p class="quote">
+            "We replaced a messy placeholder page with this structure and finally had something polished enough to share with investors and early users."
+          </p>
+
+          <div class="person">
+            <div class="avatar">AR</div>
+            <div>
+              <strong>Ana Rivera</strong>
+              <span>Co-founder, PilotLab</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="container">
+        <div class="cta-banner">
+          <div>
+            <div class="section-kicker">Ready to launch</div>
+            <h2>Make this your homepage today and replace the sample copy when you are ready.</h2>
+            <p>
+              This page is already set up for a startup-style first impression. All that is left is customizing the text, links, and brand details.
+            </p>
+          </div>
+
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="mailto:hello@northstar.com">Contact Sales</a>
+            <a class="btn btn-secondary" href="#top">Back to Top</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer class="footer">
     <div class="container">
-      © 2026 StartupName. All rights reserved.
+      <div class="footer-bar">
+        <span>&copy; 2026 Northstar. All rights reserved.</span>
+        <span>Single-file startup landing page template</span>
+      </div>
     </div>
   </footer>
 </body>
