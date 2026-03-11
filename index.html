@@ -1401,6 +1401,8 @@
 
     .hover-card {
       position: relative;
+      display: flex;
+      flex-direction: column;
       padding: clamp(1.5rem, 3vw, 2.2rem);
       min-height: 320px;
       border-radius: 34px;
@@ -1448,7 +1450,8 @@
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      margin-top: 1.5rem;
+      margin-top: auto;
+      padding-top: 1.5rem;
     }
 
     .card-tags span {
@@ -1468,14 +1471,12 @@
     }
 
     .card-footer {
-      position: absolute;
-      left: clamp(1.5rem, 3vw, 2.2rem);
-      right: clamp(1.5rem, 3vw, 2.2rem);
-      bottom: clamp(1.4rem, 3vw, 2rem);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 12px;
+      margin-top: 1rem;
       padding-top: 1rem;
       border-top: 1px solid rgba(17, 19, 24, 0.08);
       color: #404756;
